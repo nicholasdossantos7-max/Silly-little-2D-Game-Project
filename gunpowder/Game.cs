@@ -39,17 +39,20 @@ namespace MohawkGame2D
         public static City[] city = new City[10];
         City[] ytic = new City[10];
         JohnWick johnwick = new JohnWick();
+        HelenWick helenwick = new HelenWick();
+
+        Gorg gorg = new Gorg();
 
         public void Setup()
         {
             Window.SetTitle("Gunpowder");
-            Window.SetSize(800, 600);
+            Window.SetSize(1000, 600);
 
             for (int i = 0; i < city.Length; i++)
             {
                // city[i] = new City(); // Opening the game with this just causes my computer to slow down HEAVILY
                 city[i] = new City();
-                city[i].Setup(i); //
+                city[i].Setup(i); // after a while I got it working
             }
 
             for (int i = 0; i < ytic.Length; i++)
@@ -59,11 +62,15 @@ namespace MohawkGame2D
                 ytic[i].Setup(i);
             }
             johnwick.Setup();
+            //helenwick.Setup(); //probably won't work for numerous reasons
+            gorg.Setup();
+            
         }
 
         /// <summary>
         ///     Update runs every frame.
         /// </summary>
+        
         bool showtext = true;
         public void Update()
         {
@@ -79,8 +86,51 @@ namespace MohawkGame2D
             {
                 city[i].Update();
             }
-            
+
+            //for the mouse // not sure if this even goes here but idk, I'm trying to make the cool thing
+
+                {
+                Draw.SetFillColor(0, 0, 0, 0);
+                Draw.SetLineSize(5);
+                Draw.Line(Input.GetMouseX(), Input.GetMouseY(), 30 + Input.GetMouseX(), Input.GetMouseY());// I created a wrecking ball dude what?
+                Draw.Line(Input.GetMouseX(), Input.GetMouseY(), -30 + Input.GetMouseX(), Input.GetMouseY());
+                Draw.Line(Input.GetMouseX(), Input.GetMouseY(), Input.GetMouseX(), -30 + Input.GetMouseY());
+                Draw.Line(Input.GetMouseX(), Input.GetMouseY(), Input.GetMouseX(), 30 + Input.GetMouseY());
+                Draw.Circle(Input.GetMouseX(), Input.GetMouseY(), 30); // it's meant to be like a aim cursor thing you find in shooting games.
+                Draw.SetLineSize(1);
+            }
+
+            //That Super Mario Camera Movement
+            //float CameraX = 0; // God forbid I know how to do anything on this program.
+            //float screenwidth = Window.Width;
+            //float middlethreshold = screenwidth * 0.5f;
+
+            //Hidden Debug menu
+            bool showtext = false;
+            if (Input.IsKeyboardKeyDown(KeyboardKey.F1))
+            {
+                showtext = !showtext;
+            }
+
+            if (showtext)
+            {
+                Text.Draw("Debug Information", 10, 10);
+                Text.Draw("Mouse Position: " + Input.GetMouseX() + ", " + Input.GetMouseY(), 10, 30);
+                Text.Draw("Window Size: " + Window.Width + ", " + Window.Height, 10, 55);
+                Text.Draw("John Wick Position: " + johnwick.position.X + ", " + johnwick.position.Y, 10, 80);
+                Text.Draw("Helen Wick Position: " + helenwick.position.X + ", " + helenwick.position.Y, 10, 110);
+                //Text.Draw("Enemy count: " + city.Length, 10, 130); //This doesn't work even if there were enemies
+                Text.Draw("Enemy position: " + gorg.position.X + ", " + gorg.position.Y, 10, 155);
+                //Text.Draw("FPS: " + Time.FPS, 10, 70);
+            }
+            else
+            {
+                showtext = false;
+            }
+
             johnwick.Update();
+            helenwick.Update();
+            gorg.Update(); // I don't know if this will work, but I'm trying to make it so the enemy be seen on the screen.
         }
     }
 
