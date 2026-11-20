@@ -48,22 +48,12 @@ namespace MohawkGame2D
             Window.SetTitle("Gunpowder");
             Window.SetSize(1000, 600);
 
-            for (int i = 0; i < city.Length; i++)
-            {
-               // city[i] = new City(); // Opening the game with this just causes my computer to slow down HEAVILY
-                city[i] = new City();
-                city[i].Setup(i); // after a while I got it working
-            }
-
-            for (int i = 0; i < ytic.Length; i++)
-            {
-                ytic[i] = new City();
-                ytic[i].invert = true;
-                ytic[i].Setup(i);
-            }
+            CityRNG();
+            
             johnwick.Setup();
             //helenwick.Setup(); //probably won't work for numerous reasons
             gorg.Setup();
+
             
         }
 
@@ -87,9 +77,11 @@ namespace MohawkGame2D
                 city[i].Update();
             }
 
-            //for the mouse // not sure if this even goes here but idk, I'm trying to make the cool thing
+            johnwick.Update();
+            helenwick.Update();
+            gorg.Update(); // I don't know if this will work, but I'm trying to make it so the enemy be seen on the screen.
 
-                {
+            {
                 Draw.SetFillColor(0, 0, 0, 0);
                 Draw.SetLineSize(5);
                 Draw.Line(Input.GetMouseX(), Input.GetMouseY(), 30 + Input.GetMouseX(), Input.GetMouseY());// I created a wrecking ball dude what?
@@ -99,11 +91,6 @@ namespace MohawkGame2D
                 Draw.Circle(Input.GetMouseX(), Input.GetMouseY(), 30); // it's meant to be like a aim cursor thing you find in shooting games.
                 Draw.SetLineSize(1);
             }
-
-            //That Super Mario Camera Movement
-            //float CameraX = 0; // God forbid I know how to do anything on this program.
-            //float screenwidth = Window.Width;
-            //float middlethreshold = screenwidth * 0.5f;
 
             //Hidden Debug menu
             bool showtext = false;
@@ -118,9 +105,9 @@ namespace MohawkGame2D
                 Text.Draw("Mouse Position: " + Input.GetMouseX() + ", " + Input.GetMouseY(), 10, 30);
                 Text.Draw("Window Size: " + Window.Width + ", " + Window.Height, 10, 55);
                 Text.Draw("John Wick Position: " + johnwick.position.X + ", " + johnwick.position.Y, 10, 80);
-                Text.Draw("Helen Wick Position: " + helenwick.position.X + ", " + helenwick.position.Y, 10, 110);
+                //Text.Draw("Helen Wick Position: " + helenwick.position.X + ", " + helenwick.position.Y, 10, 110);
                 //Text.Draw("Enemy count: " + city.Length, 10, 130); //This doesn't work even if there were enemies
-                Text.Draw("Enemy position: " + gorg.position.X + ", " + gorg.position.Y, 10, 155);
+                //Text.Draw("Enemy position: " + gorg.position.X + ", " + gorg.position.Y, 10, 155);
                 //Text.Draw("FPS: " + Time.FPS, 10, 70);
             }
             else
@@ -128,10 +115,22 @@ namespace MohawkGame2D
                 showtext = false;
             }
 
-            johnwick.Update();
-            helenwick.Update();
-            gorg.Update(); // I don't know if this will work, but I'm trying to make it so the enemy be seen on the screen.
         }
+        public void CityRNG() //making things endless.
+        {
+
+            for (int i = 0; i<city.Length; i++)
+            {
+                city[i] = new City();
+                city[i].Setup(i);
     }
 
+            for (int i = 0; i < ytic.Length; i++)
+            {
+                ytic[i] = new City();
+                ytic[i].invert = true;
+                ytic[i].Setup(i);
+            }
+        }
+    }
 }

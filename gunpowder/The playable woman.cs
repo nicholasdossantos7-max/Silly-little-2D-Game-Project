@@ -7,7 +7,7 @@ namespace MohawkGame2D
 {
     public class HelenWick
 {
-        public Vector2 position;
+        public Vector2 position; 
         Color HelenWickColor;
 
         public void Setup()
@@ -37,15 +37,7 @@ namespace MohawkGame2D
             }
             if (Input.IsKeyboardKeyDown(KeyboardKey.LeftShift))
             {
-                //for (int i = 0; i < 6; i++)
-                //{
-                //    Vector2 gravity = new Vector2(0, 6f);
-                //    velocity += gravity * Time.DeltaTime;
-                //    position += velocity;
-                    trymove.Y -= 5;
-
-                    // return; //he falls into the abyss.
-                //}
+                trymove.Y -= 5;
             }
             else
             {

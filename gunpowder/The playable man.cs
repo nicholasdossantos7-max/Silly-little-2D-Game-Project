@@ -9,6 +9,7 @@ namespace MohawkGame2D
     public class JohnWick
 {
         public Vector2 position;
+        public static float screenoffset;
         Vector2 velocity;
         Color JohnWickColor;
 
@@ -25,11 +26,6 @@ namespace MohawkGame2D
             Draw.SetFillColor(255, 0, 0);
             Draw.Rectangle(position.X, position.Y, 30, 65);
             Move();
-
-            // pretty sure this does not go here, but I am trying to make it so the player can jump and fall, in a physical realistic way like Mario bros
-            //Vector2 gravity = new Vector2(0, 0.5f);
-            //velocity += gravity * Time.DeltaTime;
-            //position += velocity;
         }
 
         public void Move()
@@ -37,12 +33,14 @@ namespace MohawkGame2D
             Vector2 trymove = Vector2.Zero;
             if (Input.IsKeyboardKeyDown(KeyboardKey.Right))
             {
-                position.X += 5;
+                position.X += 2;
+                screenoffset -= 5;
                 //trymove.X += 5;
             }
             if (Input.IsKeyboardKeyDown(KeyboardKey.Left))
             {
-                position.X -= 5;
+                position.X -= 2;
+                screenoffset += 5;
                 //trymove.X -= 5;
             }
             //if (0 < coliding(x, 1 + y, City::City, i_map) && 1 == (Input.IsKeyboardKeyDown(KeyboardKey.Space))) // tried to make it so the player can only jump if he is standing on something
@@ -85,6 +83,7 @@ namespace MohawkGame2D
             }
             if (!coliding)
             {
+                //bool jumped;
                 position.X += trymove.X;
                 position.Y += trymove.Y;
             }   

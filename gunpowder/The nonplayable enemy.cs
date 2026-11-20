@@ -21,22 +21,20 @@ namespace MohawkGame2D
         {
             Draw.SetFillColor(204, 255, 0);
             Draw.Rectangle(position.X, position.Y, 30, 65);
-            Move();
-        }
-        //public void Move()
-//        {
-//            Vector2 trymove = Vector2.Zero;
-//            if (johnwick.position.X += 5)
-//            {
-//                position.X += 5;
-//                //trymove.X += 5;
-//            }
-//            else if (johnwick.position.X -= 5)
-//            {
-//                position.X -= 5;
-//                //trymove.X -= 5;
-//            }
-//        }
-//    }
-//}
+            //Move();
 
+            //public void Move()
+            //        {
+            //            Vector2 trymove = Vector2.Zero;
+            //            if (johnwick.position.X += 5)
+            //            {
+            //                position.X += 5;
+            //                //trymove.X += 5;
+            //            }
+            //            else if (johnwick.position.X -= 5)
+            //            {
+            //                position.X -= 5;
+            //                //trymove.X -= 5;
+        }
+    }
+}
